@@ -16,10 +16,12 @@
                 <img src="{{ Storage::disk('public')->url(auth()->user()->path_image) }}" alt="" class="img-circle elevation-2">
                 @else
                 @endif --}}
-                <img src="{{ asset('AdminLTE/dist/img/user1-128x128.jpg') }}" alt="" class="img-circle elevation-2">
+                <img src="{{ asset('AdminLTE/dist/img/user1-128x128.jpg') }}" alt=""
+                    class="img-circle elevation-2">
             </div>
             <div class="info">
-                <a href="{{ route('profile.show') }}" class="d-block" data-toggle="tooltip" data-placement="top" title="Edit Profil">
+                <a href="{{ route('profile.show') }}" class="d-block" data-toggle="tooltip" data-placement="top"
+                    title="Edit Profil">
                     {{ auth()->user()->name }}
                     <i class="fas fa-pencil-alt ml-2 text-sm text-primary"></i>
                 </a>
@@ -33,7 +35,8 @@
                 <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->is('admin/dashboard*') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-link {{ request()->is('dashboard*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -41,79 +44,80 @@
                     </a>
                 </li>
                 @if (auth()->user()->hasRole('admin'))
-                <li class="nav-header">MASTER</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-cube"></i>
-                        <p>
-                            Kategori
-                        </p>
-                    </a>
-                </li>
+                    <li class="nav-header">MASTER</li>
+                    <li class="nav-item">
+                        <a href="{{ route('category.index') }}"
+                            class="nav-link {{ request()->is('category*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-cube"></i>
+                            <p>
+                                Kategori
+                            </p>
+                        </a>
+                    </li>
                 @else
-                <li class="nav-header">MASTER</li>
+                    <li class="nav-header">MASTER</li>
                 @endif
                 @if (auth()->user()->hasRole('admin'))
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-folder"></i>
-                        <p>
-                            Produk
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-header">REFERENSI</li>
-                @if (auth()->user()->hasRole('admin'))
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user-plus"></i>
-                        <p>
-                            Pelanggan
-                        </p>
-                    </a>
-                </li>
-                @endif
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-hand-holding-usd"></i>
-                        <p>
-                            Daftar Transaksi
-                        </p>
-                    </a>
-                </li>
-                @endif
-
-                @if (auth()->user()->hasRole('admin'))
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-envelope"></i>
-                        <p>
-                            Kontak Masuk
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-header">REPORT</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-file-pdf"></i>
-                        <p>
-                            Laporan
-                        </p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-folder"></i>
+                            <p>
+                                Produk
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-header">REFERENSI</li>
+                    @if (auth()->user()->hasRole('admin'))
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user-plus"></i>
+                                <p>
+                                    Pelanggan
+                                </p>
+                            </a>
+                        </li>
+                    @endif
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-hand-holding-usd"></i>
+                            <p>
+                                Daftar Transaksi
+                            </p>
+                        </a>
+                    </li>
                 @endif
 
                 @if (auth()->user()->hasRole('admin'))
-                <li class="nav-header">SISTEM</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-cogs"></i>
-                        <p>
-                            Pengaturan
-                        </p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-envelope"></i>
+                            <p>
+                                Kontak Masuk
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-header">REPORT</li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-file-pdf"></i>
+                            <p>
+                                Laporan
+                            </p>
+                        </a>
+                    </li>
+                @endif
+
+                @if (auth()->user()->hasRole('admin'))
+                    <li class="nav-header">SISTEM</li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-cogs"></i>
+                            <p>
+                                Pengaturan
+                            </p>
+                        </a>
+                    </li>
                 @endif
             </ul>
         </nav>
