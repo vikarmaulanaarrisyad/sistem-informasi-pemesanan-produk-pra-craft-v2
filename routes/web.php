@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('welcome');
 });
 
 Route::group([
@@ -34,5 +34,6 @@ Route::group([
         // route categories
         Route::get('/category/data', [CategoryController::class, 'data'])->name('category.data');
         Route::resource('/category', CategoryController::class);
+        Route::put('/category/{category}/update_status', [CategoryController::class, 'updateStatus'])->name('category.update_status');
     });
 });

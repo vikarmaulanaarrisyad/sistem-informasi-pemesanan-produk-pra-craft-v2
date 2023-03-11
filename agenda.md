@@ -27,8 +27,7 @@
 
 ### Sedang Di Kerjakan
 
-    - modul category : Filter category berdasarkan status publish atau archived
-    - modul category : update status publish atau archived
+    
 
 ### Selesai di kerjakan
 
@@ -36,3 +35,6 @@
     - Membuat Autentikasi dan Otorisasi
     - memasang template adminlte
     - modul category : CRUD
+    - modul category : Filter category berdasarkan status publish atau archived
+    - modul category : update status publish atau archived
+

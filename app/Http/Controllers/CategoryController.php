@@ -23,12 +23,20 @@ class CategoryController extends Controller
      */
     public function data(Request $request)
     {
-        $category = Category::all();
+        $category = Category::when($request->has('status') && $request->status != "", function ($query) use ($request) {
+            $query->where('status', $request->status);
+        })->orderBy('created_at', 'asc');
 
         return datatables($category)
             ->addIndexColumn()
             ->addColumn('gambar', function ($category) {
                 return '<img src="' . Storage::url($category->image) . '" class="img-thumbnail" width="50px">';
+            })
+            ->addColumn('status', function ($category) {
+                return '
+                    <button data-nama="' . $category->name . '" id="updateStatus" onclick="updateStatus(`' . route('category.update_status', $category->id) . '`, `' . $category->name . '`)"
+                    class="btn btn-xs updateStatus btn-' . $category->statusColor() . '">' . $category->statusText() . '</button>
+                ';
             })
             ->addColumn('aksi', function ($category) {
                 return '
@@ -99,11 +107,21 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * updateing status.
      */
-    public function edit(Category $category)
+    public function updateStatus(Category $category)
     {
-        //
+        if ($category->status != 'publish') {
+            $category->update([
+                'status' => 'publish'
+            ]);
+        } else {
+            $category->update([
+                'status' => 'archived'
+            ]);
+        }
+
+        return response()->json(['data' => $category, 'message' => 'Data ' . $category->name . ' berhasil diubah.']);
     }
 
     /**

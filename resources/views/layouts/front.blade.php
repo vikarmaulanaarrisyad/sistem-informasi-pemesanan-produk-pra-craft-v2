@@ -62,7 +62,7 @@
                     </a>
                 </div>
                 <div class="col-lg-2 action " style="white-space: nowrap;">
-                    <a href="#" class="btn btn-sm btn-action py-0 rounded-0">Login</a>
+                    <a href="{{ route('login') }}" class="btn btn-sm btn-action py-0 rounded-0">Login</a>
                     <a href="#" class="btn btn-sm btn-action py-0 rounded-0">Register</a>
                 </div>
             </div>

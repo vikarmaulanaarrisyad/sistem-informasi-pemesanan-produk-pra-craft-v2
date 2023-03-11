@@ -16,11 +16,24 @@
                             class="fas fa-plus-circle"></i> Tambah</button>
                 </x-slot>
 
+                <div class="d-flex justify-content-between">
+                    <div class="form-group">
+                        <label for="status2">Status</label>
+                        <select name="status2" id="status2" class="custom-select">
+                            <option value="" selected>Semua</option>
+                            <option value="publish" {{ request('status') == 'publish' ? 'selected' : '' }}>Publish</option>
+                            <option value="archived" {{ request('status') == 'archived' ? 'selected' : '' }}>Diarsipkan
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
                 <x-table>
                     <x-slot name="thead">
                         <th>No</th>
                         <th>Kategori</th>
                         <th>Gambar</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </x-slot>
                 </x-table>
@@ -46,7 +59,10 @@
             processing: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('category.data') }}'
+                url: '{{ route('category.data') }}',
+                data: function(d) {
+                    d.status = $('[name=status2]').val();
+                }
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -60,12 +76,23 @@
                     data: 'gambar'
                 },
                 {
+                    data: 'status',
+                    sortable: false,
+                    searchable: false
+                },
+                {
                     data: 'aksi',
                     sortable: false,
                     searchable: false
                 },
             ]
         });
+
+        $('[name=status2]').on('change', function() {
+            table.ajax.reload();
+        })
+
+
 
         function addForm(url, title = 'Tambah Daftar kategori') {
             $(modal).modal('show');
@@ -168,6 +195,56 @@
                 if (result.isConfirmed) {
                     $.post(url, {
                             '_method': 'delete'
+                        })
+                        .done(response => {
+                            if (response.status = 200) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil',
+                                    text: response.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                })
+                                table.ajax.reload();
+                            }
+                        })
+                        .fail(errors => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Opps! Gagal!',
+                                text: errors.responseJSON.message,
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                            table.ajax.reload();
+                        });
+                }
+            })
+        }
+
+        function updateStatus(url, name) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: true,
+            })
+            swalWithBootstrapButtons.fire({
+                title: 'Perhatian',
+                text: 'Apakah anda yakin ingin mengubah status data ' + name +
+                    ' ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: 'rgb(48, 133, 214)',
+                cancelButtonColor: '#aaa',
+                confirmButtonText: 'Ya, Aktifkan!',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(url, {
+                            '_method': 'put'
                         })
                         .done(response => {
                             if (response.status = 200) {
