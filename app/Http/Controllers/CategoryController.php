@@ -18,6 +18,15 @@ class CategoryController extends Controller
         return view('category.index');
     }
 
+    public function categorySearch(Request $request)
+    {
+        $keyword = $request->get('q');
+
+        $categories = Category::where("name", "LIKE", "%$keyword%")->get();
+
+        return $categories;
+    }
+
     /**
      * Show data with datatable.
      */
@@ -57,12 +66,14 @@ class CategoryController extends Controller
             $request->all(),
             [
                 'name' => 'required|min:1',
-                'image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+                'image' => 'nullable|mimes:png,jpg,jpeg|max:2048|min:200',
                 'slug' => 'unique:categories,slug'
             ],
             [
                 'name.required' => 'Nama kategori wajib diisi.',
                 'image.mimes' => 'File harus berupa berkas berjenis: png, jpg, jpeg.',
+                'image.min' => 'File harus berukuran minimal 200 kb.',
+                'image.max' => 'File harus berukuran maksimal 2 MB.',
             ]
         );
 

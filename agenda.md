@@ -21,13 +21,15 @@
 
 ### List yang akan di kerjakan
 
-    - modul  product : CRUD, Filter product berdasarkan category berdasarkan stok dan berdasarkan price, import excel, export pdf atau exvel
-    - modul transaksi : masuk, proses, cancel, finish, ubah status transaksi
+    - modul  product : Filter product berdasarkan category, berdasarkan stok dan berdasarkan price,
+    - modul  product : import excel, export pdf atau excel,
+    - modul  product : filtering product jumlah stok kurang dari 10,
+    - modul transaksi : filter transaksi masuk, proses, cancel, finish
+    - modul transaksi : ubah status transaksi jika user sudah melakukan pembayaran
     - modul laporan : harian, bulanan, tahunan, cetak pdf atau excel
 
 ### Sedang Di Kerjakan
 
-    
 
 ### Selesai di kerjakan
 
@@ -37,4 +39,5 @@
     - modul category : CRUD
     - modul category : Filter category berdasarkan status publish atau archived
     - modul category : update status publish atau archived
+    - modul  product : CRUD, (Bug Select 2)
 

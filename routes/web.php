@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\{
     DashboardController,
-    CategoryController
+    CategoryController,
+    ProductController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +36,10 @@ Route::group([
         Route::get('/category/data', [CategoryController::class, 'data'])->name('category.data');
         Route::resource('/category', CategoryController::class);
         Route::put('/category/{category}/update_status', [CategoryController::class, 'updateStatus'])->name('category.update_status');
+        Route::get('ajax/categories/search',[CategoryController::class,'categorySearch'])->name('category.search');
+
+        // route products
+        Route::get('/products/data', [ProductController::class, 'data'])->name('products.data');
+        Route::resource('/products', ProductController::class);
     });
 });

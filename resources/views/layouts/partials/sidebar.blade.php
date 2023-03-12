@@ -59,7 +59,8 @@
                 @endif
                 @if (auth()->user()->hasRole('admin'))
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('products.index') }}"
+                            class="nav-link {{ request()->is('products*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-folder"></i>
                             <p>
                                 Produk
