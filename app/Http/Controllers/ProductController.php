@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $categories = Category::pluck('name','id');
+        $categories = Category::pluck('name', 'id');
         return view('products.index', compact('categories'));
     }
 
@@ -25,7 +25,23 @@ class ProductController extends Controller
      */
     public function data(Request $request)
     {
-        $products = Product::all();
+        $products = Product::when($request->has('category') && $request->category != "", function ($query) use ($request) {
+            // filter kategori
+            return $query->whereHas('categories', function ($query) use ($request) {
+                $query->where('category_id', $request->category);
+            });
+        })->when($request->has('price_from') && $request->price_from != "", function ($query) use ($request) {
+            $query->where('price', '>=', str_replace('.', '', $request->price_from));
+        })
+            ->when($request->has('price_to') && $request->price_to != "", function ($query) use ($request) {
+                $query->where('price', '<=', str_replace('.', '', $request->price_to));
+            })
+            ->when($request->has('stock_from') && $request->stock_from != "", function ($query) use ($request) {
+                $query->where('stock', '>=', $request->stock_from);
+            })
+            ->when($request->has('stock_to') && $request->stock_to != "", function ($query) use ($request) {
+                $query->where('stock', '<=', $request->stock_to);
+            });
 
         return datatables($products)
             ->addIndexColumn()

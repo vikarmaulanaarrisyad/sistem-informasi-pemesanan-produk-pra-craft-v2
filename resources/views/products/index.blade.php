@@ -18,13 +18,33 @@
 
                 <div class="d-flex justify-content-between">
                     <div class="form-group">
-                        <label for="status2">Status</label>
-                        <select name="status2" id="status2" class="custom-select">
+                        <label for="category1">Filter Kategori</label>
+                        <select name="category1" id="category1" class="custom-select">
                             <option value="" selected>Semua</option>
-                            <option value="publish" {{ request('status') == 'publish' ? 'selected' : '' }}>Publish</option>
-                            <option value="archived" {{ request('status') == 'archived' ? 'selected' : '' }}>Diarsipkan
+                            @foreach ($categories as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                            @endforeach
                             </option>
                         </select>
+                    </div>
+
+                    <div class="d-flex ">
+                        <div class="form-group">
+                            <label for="price_from">Harga Dari:</label>
+                            <input onkeyup="format_uang(this)" type="number" id="price_from" name="price_from" class="form-control" value="{{ request('price_from') }}">
+                        </div>
+                        <div class="form-group mx-1">
+                            <label for="price_to">Harga Sampai:</label>
+                            <input onkeyup="format_uang(this)" type="number" id="price_to" name="price_to" class="form-control" value="{{ request('price_to') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="stock_from">Stok Dari:</label>
+                            <input type="number" id="stock_from" name="stock_from" class="form-control" value="{{ request('stock_from') }}">
+                        </div>
+                        <div class="form-group mx-1">
+                            <label for="stock_to">Stok Sampai:</label>
+                            <input type="number" id="stock_to" name="stock_to" class="form-control" value="{{ request('stock_to') }}">
+                        </div>
                     </div>
                 </div>
 
@@ -64,7 +84,11 @@
             ajax: {
                 url: '{{ route('products.data') }}',
                 data: function(d) {
-                    d.status = $('[name=status2]').val();
+                    d.category = $('[name=category1]').val();
+                    d.price_from = $('[name=price_from]').val();
+                    d.price_to = $('[name=price_to]').val();
+                    d.stock_from = $('[name=stock_from]').val();
+                    d.stock_to = $('[name=stock_to]').val();
                 }
             },
             columns: [{
@@ -95,7 +119,19 @@
             ]
         });
 
-        $('[name=status2]').on('change', function() {
+        $('[name=category1]').on('change', function() {
+            table.ajax.reload();
+        })
+        $('[name=price_from]').on('change', function() {
+            table.ajax.reload();
+        })
+        $('[name=price_to]').on('change', function() {
+            table.ajax.reload();
+        })
+        $('[name=stock_from]').on('change', function() {
+            table.ajax.reload();
+        })
+        $('[name=stock_to]').on('change', function() {
             table.ajax.reload();
         })
 

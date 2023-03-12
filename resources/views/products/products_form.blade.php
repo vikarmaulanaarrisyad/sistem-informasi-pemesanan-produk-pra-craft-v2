@@ -26,7 +26,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="description">Deskripsi</label>
-                <textarea name="description" id="description" rows="3" class="form-control"></textarea>
+                <textarea name="description" id="description" rows="3" class="form-control" autocomplete="off"></textarea>
             </div>
         </div>
     </div>
@@ -35,14 +35,15 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="price">Harga</label>
-                <input type="text" name="price" id="price" class="form-control" onkeyup="format_uang(this)">
+                <input type="text" name="price" id="price" class="form-control" onkeyup="format_uang(this)"
+                    autocomplete="off">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="stock">Stok</label>
                 <input type="number" min="1" name="stock" id="stock" class="form-control"
-                    onkeyup="format_uang(this)">
+                    onkeyup="format_uang(this)" autocomplete="off">
             </div>
         </div>
     </div>
