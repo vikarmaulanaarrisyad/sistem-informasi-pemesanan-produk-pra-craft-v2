@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductExport;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class ProductController extends Controller
 {
@@ -219,5 +223,17 @@ class ProductController extends Controller
         }
 
         return response()->json(['message' => 'Data ' . $product->name . ' berhasil dihapus.']);
+    }
+
+    public function exportExcel(Request $request)
+    {
+        return Excel::download(new ProductExport, 'Laporan-produk-'  . date('YmdHis') . '.xlsx');
+    }
+
+    public function exportPDF(Request $request)
+    {
+        $data = Product::orderBy('created_at', 'DESC')->get();
+        $pdf = PDF::loadView('products.pdf', compact('data'));
+        return $pdf->stream('Laporan-produk-' . date('Y-m-d-his') . '.pdf');
     }
 }

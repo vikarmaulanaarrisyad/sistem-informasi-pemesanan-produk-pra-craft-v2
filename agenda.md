@@ -21,7 +21,6 @@
 
 ### List yang akan di kerjakan
 
-    - modul  product : import excel, export pdf atau excel,
     - modul  product : filtering product jumlah stok kurang dari 10,
     - modul transaksi : filter transaksi masuk, proses, cancel, finish
     - modul transaksi : ubah status transaksi jika user sudah melakukan pembayaran
@@ -39,3 +38,5 @@
     - modul category : update status publish atau archived
     - modul  product : CRUD, (Bug Select 2)
     - modul  product : Filter product berdasarkan category, berdasarkan stok dan berdasarkan price,
+    - modul  product : export excel
+    - modul  product : export pdf

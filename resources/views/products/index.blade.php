@@ -12,8 +12,17 @@
         <div class="col-md-12">
             <x-card>
                 <x-slot name="header">
-                    <button onclick="addForm(`{{ route('products.store') }}`)" class="btn btn-primary btn-sm"><i
-                            class="fas fa-plus-circle"></i> Tambah</button>
+
+                    <div class="btn-group">
+                        <button onclick="addForm(`{{ route('products.store') }}`)" class="btn btn-primary"><i
+                                class="fas fa-plus-circle"></i> Tambah</button>
+                        <a target="_blank" href="{{ route('products.export.pdf') }}"
+                            class="btn btn-danger"><i class="fas fa-file-pdf"></i> Export
+                            PDF</a>
+                        <a target="_blank" href="{{ route('products.export.excel') }}" class="btn btn-success"><i
+                                class="fas fa-file-excel"></i> Export
+                            Excel</a>
+                    </div>
                 </x-slot>
 
                 <div class="d-flex justify-content-between">
@@ -31,19 +40,23 @@
                     <div class="d-flex ">
                         <div class="form-group">
                             <label for="price_from">Harga Dari:</label>
-                            <input onkeyup="format_uang(this)" type="number" id="price_from" name="price_from" class="form-control" value="{{ request('price_from') }}">
+                            <input onkeyup="format_uang(this)" type="number" id="price_from" name="price_from"
+                                class="form-control" value="{{ request('price_from') }}">
                         </div>
                         <div class="form-group mx-1">
                             <label for="price_to">Harga Sampai:</label>
-                            <input onkeyup="format_uang(this)" type="number" id="price_to" name="price_to" class="form-control" value="{{ request('price_to') }}">
+                            <input onkeyup="format_uang(this)" type="number" id="price_to" name="price_to"
+                                class="form-control" value="{{ request('price_to') }}">
                         </div>
                         <div class="form-group">
                             <label for="stock_from">Stok Dari:</label>
-                            <input type="number" id="stock_from" name="stock_from" class="form-control" value="{{ request('stock_from') }}">
+                            <input type="number" id="stock_from" name="stock_from" class="form-control"
+                                value="{{ request('stock_from') }}">
                         </div>
                         <div class="form-group mx-1">
                             <label for="stock_to">Stok Sampai:</label>
-                            <input type="number" id="stock_to" name="stock_to" class="form-control" value="{{ request('stock_to') }}">
+                            <input type="number" id="stock_to" name="stock_to" class="form-control"
+                                value="{{ request('stock_to') }}">
                         </div>
                     </div>
                 </div>

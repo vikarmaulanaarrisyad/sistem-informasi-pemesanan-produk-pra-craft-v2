@@ -36,10 +36,12 @@ Route::group([
         Route::get('/category/data', [CategoryController::class, 'data'])->name('category.data');
         Route::resource('/category', CategoryController::class);
         Route::put('/category/{category}/update_status', [CategoryController::class, 'updateStatus'])->name('category.update_status');
-        Route::get('ajax/categories/search',[CategoryController::class,'categorySearch'])->name('category.search');
+        Route::get('ajax/categories/search', [CategoryController::class, 'categorySearch'])->name('category.search');
 
         // route products
         Route::get('/products/data', [ProductController::class, 'data'])->name('products.data');
         Route::resource('/products', ProductController::class);
+        Route::get('products/export/excel', [ProductController::class, 'exportExcel'])->name('products.export.excel');
+        Route::get('products/export/pdf', [ProductController::class, 'exportPDF'])->name('products.export.pdf');
     });
 });
