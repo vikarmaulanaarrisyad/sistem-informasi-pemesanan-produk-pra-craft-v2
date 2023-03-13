@@ -30,8 +30,8 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column nav-compact nav-child-indent" data-widget="treeview" role="menu"
-                data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column nav-compact nav-child-indent" data-widget="treeview"
+                role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
                 <li class="nav-item">
@@ -79,7 +79,8 @@
                         </li>
                     @endif
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('orders.index') }}"
+                            class="nav-link {{ request()->is('orders*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-hand-holding-usd"></i>
                             <p>
                                 Daftar Transaksi

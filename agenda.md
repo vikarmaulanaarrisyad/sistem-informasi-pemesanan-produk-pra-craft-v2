@@ -1,6 +1,5 @@
 ## FRONTEND
 
-    - landing page
     - halaman produk
     - halaman checkout
 
@@ -18,15 +17,19 @@
 
     - Cek Ongkir ( Raja Ongkir )
     - Payment Gateway ( Midtrans )
+    - chat user ke admin
 
 ### List yang akan di kerjakan
 
     - modul  product : filtering product jumlah stok kurang dari 10,
-    - modul transaksi : filter transaksi masuk, proses, cancel, finish
     - modul transaksi : ubah status transaksi jika user sudah melakukan pembayaran
     - modul laporan : harian, bulanan, tahunan, cetak pdf atau excel
 
 ### Sedang Di Kerjakan
+
+    - landing page ( View Cart )
+    - modul transaksi
+    - modul transaksi : filter transaksi masuk, proses, cancel, finish
 
 ### Selesai di kerjakan
 
